@@ -1,0 +1,69 @@
+table_name,column_name,data_type,character_maximum_length,is_nullable,column_default,constraint_type
+agencias_clientes,id,integer,null,NO,nextval('agencias_clientes_id_seq'::regclass),PRIMARY KEY
+agencias_clientes,nombre_agencia,character varying,255,NO,null,null
+agencias_clientes,latitud,numeric,null,YES,null,null
+agencias_clientes,longitud,numeric,null,YES,null,null
+agencias_clientes,google_maps_api_key,text,null,YES,null,null
+agencias_clientes,created_at,timestamp with time zone,null,YES,now(),null
+alertas,id,integer,null,NO,nextval('alertas_id_seq'::regclass),PRIMARY KEY
+alertas,timestamp,timestamp with time zone,null,YES,now(),null
+alertas,tipo_alerta,character varying,50,YES,null,null
+alertas,competidor,character varying,255,YES,null,null
+alertas,promocion,text,null,YES,null,null
+alertas,umbral,character varying,255,YES,null,null
+alertas,accion,text,null,YES,null,null
+alertas,created_at,timestamp with time zone,null,YES,now(),null
+alertas,agencia_cliente_id,integer,null,YES,null,FOREIGN KEY
+alertas,activo,boolean,null,YES,true,null
+alertas,tipo,text,null,YES,null,null
+alertas,titulo,text,null,YES,null,null
+alertas,tiempo,text,null,YES,null,null
+competidores,id,integer,null,NO,nextval('competidores_id_seq'::regclass),PRIMARY KEY
+competidores,agencia_cliente_id,integer,null,YES,null,FOREIGN KEY
+competidores,nombre_competidor,character varying,255,YES,null,null
+competidores,marca,character varying,100,YES,null,null
+competidores,url_promociones,text,null,YES,null,null
+competidores,created_at,timestamp with time zone,null,YES,now(),null
+competidores,segmento,USER-DEFINED,null,YES,'VOLUMEN'::tipo_segmento,null
+competidores,ultima_actualizacion,timestamp with time zone,null,YES,now(),null
+competidores,ubicacion,text,null,YES,'CDMX'::text,null
+competidores,tasa_actual,numeric,null,YES,0,null
+competidores,promocion_activa,text,null,YES,'Sin datos'::text,null
+competidores,nombre,text,null,YES,null,null
+configuracion,id,uuid,null,NO,gen_random_uuid(),PRIMARY KEY
+configuracion,tasa_maxima,numeric,null,YES,12.5,null
+configuracion,tasa_minima,numeric,null,YES,8.99,null
+configuracion,umbral_alerta,numeric,null,YES,50000,null
+configuracion,email_notificaciones,text,null,YES,'gerencia@hondasanantonio.mx'::text,null
+configuracion,frecuencia_monitoreo,text,null,YES,'Diaria'::text,null
+configuracion,created_at,timestamp with time zone,null,YES,now(),null
+kpis_dashboard,id,integer,null,NO,nextval('kpis_dashboard_id_seq'::regclass),PRIMARY KEY
+kpis_dashboard,metrica,character varying,100,NO,null,UNIQUE
+kpis_dashboard,valor_actual,numeric,null,YES,null,null
+kpis_dashboard,valor_competencia,numeric,null,YES,null,null
+kpis_dashboard,diferencial,numeric,null,YES,null,null
+kpis_dashboard,updated_at,timestamp with time zone,null,YES,now(),null
+metricas,id,uuid,null,NO,gen_random_uuid(),PRIMARY KEY
+metricas,tipo,text,null,YES,null,null
+metricas,valor,numeric,null,YES,null,null
+metricas,tendencia,text,null,YES,null,null
+metricas,fecha,timestamp with time zone,null,YES,now(),null
+metricas,descripcion,text,null,YES,null,null
+productos_propios,id,integer,null,NO,nextval('productos_propios_id_seq'::regclass),PRIMARY KEY
+productos_propios,agencia_cliente_id,integer,null,YES,null,FOREIGN KEY
+productos_propios,modelo,character varying,255,NO,null,null
+productos_propios,competidor_directo,character varying,255,NO,null,null
+productos_propios,precio_lista,numeric,null,NO,null,null
+productos_propios,descuento_actual,numeric,null,YES,0,null
+productos_propios,created_at,timestamp with time zone,null,YES,now(),null
+productos_propios,tipo_carroceria,character varying,50,YES,null,null
+productos_propios,rivales_manuales,ARRAY,null,YES,null,null
+productos_propios,es_nicho,boolean,null,YES,false,null
+productos_propios,segmento,USER-DEFINED,null,YES,'VOLUMEN'::tipo_segmento,null
+reseñas_competencia,id,integer,null,NO,"nextval('""reseñas_competencia_id_seq""'::regclass)",PRIMARY KEY
+reseñas_competencia,timestamp,timestamp with time zone,null,YES,now(),null
+reseñas_competencia,competidor,character varying,255,YES,null,null
+reseñas_competencia,rating,integer,null,YES,null,null
+reseñas_competencia,texto_reseña,text,null,YES,null,null
+reseñas_competencia,palabras_clave_negativas,ARRAY,null,YES,null,null
+reseñas_competencia,etiqueta,character varying,50,YES,null,null

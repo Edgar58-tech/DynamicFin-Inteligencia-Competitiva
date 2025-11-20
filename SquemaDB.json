@@ -1,0 +1,614 @@
+[
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('agencias_clientes_id_seq'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "nombre_agencia",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "NO",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "latitud",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "longitud",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "google_maps_api_key",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "agencias_clientes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('alertas_id_seq'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "timestamp",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "tipo_alerta",
+    "data_type": "character varying",
+    "character_maximum_length": 50,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "competidor",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "promocion",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "umbral",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "accion",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "agencia_cliente_id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "activo",
+    "data_type": "boolean",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "true",
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "tipo",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "titulo",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "alertas",
+    "column_name": "tiempo",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('competidores_id_seq'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "agencia_cliente_id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "nombre_competidor",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "marca",
+    "data_type": "character varying",
+    "character_maximum_length": 100,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "url_promociones",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "segmento",
+    "data_type": "USER-DEFINED",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'VOLUMEN'::tipo_segmento",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "ultima_actualizacion",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "ubicacion",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'CDMX'::text",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "tasa_actual",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "0",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "promocion_activa",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'Sin datos'::text",
+    "constraint_type": null
+  },
+  {
+    "table_name": "competidores",
+    "column_name": "nombre",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "id",
+    "data_type": "uuid",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "tasa_maxima",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "12.5",
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "tasa_minima",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "8.99",
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "umbral_alerta",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "50000",
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "email_notificaciones",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'gerencia@hondasanantonio.mx'::text",
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "frecuencia_monitoreo",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'Diaria'::text",
+    "constraint_type": null
+  },
+  {
+    "table_name": "configuracion",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('kpis_dashboard_id_seq'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "metrica",
+    "data_type": "character varying",
+    "character_maximum_length": 100,
+    "is_nullable": "NO",
+    "column_default": null,
+    "constraint_type": "UNIQUE"
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "valor_actual",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "valor_competencia",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "diferencial",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "kpis_dashboard",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "id",
+    "data_type": "uuid",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "tipo",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "valor",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "tendencia",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "fecha",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "metricas",
+    "column_name": "descripcion",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('productos_propios_id_seq'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "agencia_cliente_id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "modelo",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "NO",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "competidor_directo",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "NO",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "precio_lista",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "descuento_actual",
+    "data_type": "numeric",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "0",
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "tipo_carroceria",
+    "data_type": "character varying",
+    "character_maximum_length": 50,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "rivales_manuales",
+    "data_type": "ARRAY",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "es_nicho",
+    "data_type": "boolean",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "false",
+    "constraint_type": null
+  },
+  {
+    "table_name": "productos_propios",
+    "column_name": "segmento",
+    "data_type": "USER-DEFINED",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "'VOLUMEN'::tipo_segmento",
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "id",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "NO",
+    "column_default": "nextval('\"reseñas_competencia_id_seq\"'::regclass)",
+    "constraint_type": "PRIMARY KEY"
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "timestamp",
+    "data_type": "timestamp with time zone",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "competidor",
+    "data_type": "character varying",
+    "character_maximum_length": 255,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "rating",
+    "data_type": "integer",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "texto_reseña",
+    "data_type": "text",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "palabras_clave_negativas",
+    "data_type": "ARRAY",
+    "character_maximum_length": null,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  },
+  {
+    "table_name": "reseñas_competencia",
+    "column_name": "etiqueta",
+    "data_type": "character varying",
+    "character_maximum_length": 50,
+    "is_nullable": "YES",
+    "column_default": null,
+    "constraint_type": null
+  }
+]
