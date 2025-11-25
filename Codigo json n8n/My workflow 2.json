@@ -1,0 +1,241 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {},
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        2560,
+        720
+      ],
+      "id": "2b09e803-f391-4407-9cdf-1f27ea2d4f7e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://www.toyotacredito.com.mx/Portal/promociones",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2784,
+        720
+      ],
+      "id": "408543fa-3389-4bb6-9e15-3c0f25eaaf4c",
+      "name": "HTTP Request",
+      "credentials": {
+        "supabaseApi": {
+          "id": "4FI2nYTwq8XK6GOf",
+          "name": "Mi Supabase CI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "titulo_promo",
+              "cssSelector": ".card-title"
+            },
+            {
+              "key": "descripcion_promo ",
+              "cssSelector": ".card-text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        3008,
+        720
+      ],
+      "id": "f1a64f84-d295-4f66-a12d-9d775d3b7b59",
+      "name": "HTML",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Actúa como un Analista Experto en Productos Financieros Automotrices y Riesgo Crediticio en México.\n\nAnaliza el siguiente texto crudo extraído de una promoción web:\n\"\"\"\nTítulo: {{ $json.titulo_promo }}\nDescripción: {{ $json.descripcion_promo }}\n\"\"\"\n\nTu tarea es extraer y estructurar la inteligencia comercial de esta oferta.\nDebes distinguir si es Crédito Tradicional, Leasing (Arrendamiento) o Autofinanciamiento.\n\nInstrucciones Técnicas de Salida:\nDevuelve ÚNICAMENTE un objeto JSON válido (raw, sin bloques de código ```json) con la siguiente estructura exacta. Si un dato no está disponible, usa \"N/A\" o 0.\n\n{\n  \"analisis_oferta\": {\n    \"competidor\": \"Identifica la marca o financiera (ej. Toyota, Nexu, banco)\",\n    \"modelo_vehiculo\": \"El modelo específico (ej. Tacoma, Versa)\",\n    \"tipo_financiamiento\": \"Clasifícalo: 'Credito', 'Leasing', 'Autofinanciamiento' o 'Broker'\",\n    \"tasa_nominal\": \"La tasa de interés anual (ej. '9.99%' o '0%')\",\n    \"cat_promedio\": \"El Costo Anual Total si se menciona (ej. '14.5%'). Dato crítico.\",\n    \"enganche_minimo\": \"Porcentaje o monto (ej. '10%' o '$0 de enganche')\",\n    \"plazo_maximo\": \"Meses máximos disponibles (ej. '72 meses')\",\n    \"comisiones\": \"Detalla comisión por apertura u otras (ej. '2.5%' o 'Gratis')\",\n    \"requisitos_buro\": \"Nivel de exigencia (ej. 'Estricto', 'Flexible', 'Sin Buró')\",\n    \"beneficio_principal\": \"El gancho de marketing (ej. 'Seguro Gratis', 'Tasa 0%')\"\n  },\n  \"evaluacion_riesgo\": {\n    \"es_alerta_critica\": true, // true SOLO si Tasa es < 9% o hay Bono > $30k\n    \"nivel_transparencia\": \"Alto/Medio/Bajo (¿Mencionan el CAT claramente?)\",\n    \"posible_riesgo\": \"Detecta letras chiquitas o riesgos (ej. 'Solo con financiera de casa', 'Pagos crecientes')\"\n  },\n  \"sales_enablement\": {\n    \"script_refutacion\": \"Escribe un argumento de venta corto (max 30 palabras) para que mi vendedor rebata esta oferta usando el TCO. Ejemplo: 'Su tasa es 0% pero el CAT es 15% por el seguro financiado. Nuestro Leasing deduce el 100%'.\"\n  }\n}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        3232,
+        720
+      ],
+      "id": "1d0a46a3-c45c-4aaa-8cde-541ab84ac9ba",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "5KkxmS3Y27zIuuYi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Intentar múltiples rutas donde puede estar la respuesta de Gemini\nlet geminiResponse;\n\ntry {\n  // Intento 1: Path estándar de Gemini\n  geminiResponse = $input.first().json.content?.parts?.[0]?.text;\n  \n  // Intento 2: Path alternativo\n  if (!geminiResponse) {\n    geminiResponse = $input.first().json.message?.content;\n  }\n  \n  // Intento 3: Directamente en content\n  if (!geminiResponse) {\n    geminiResponse = $input.first().json.content;\n  }\n  \n  // Intento 4: En text directo\n  if (!geminiResponse) {\n    geminiResponse = $input.first().json.text;\n  }\n  \n  // Si no encontramos nada, loguear todo el objeto para debug\n  if (!geminiResponse) {\n    console.log('Estructura completa del input:', JSON.stringify($input.first().json, null, 2));\n    throw new Error('No se pudo encontrar la respuesta de Gemini en ningún path conocido');\n  }\n  \n  console.log('Respuesta de Gemini encontrada:', geminiResponse.substring(0, 200));\n  \n  // Limpiar la respuesta si tiene backticks de markdown\n  if (geminiResponse.includes('```json')) {\n    geminiResponse = geminiResponse.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  }\n  \n  // Intentar parsear el JSON\n  const parsed = JSON.parse(geminiResponse);\n  \n  console.log('JSON parseado exitosamente');\n  \n  return {\n    json: {\n      competidor: parsed.analisis_oferta?.competidor || 'N/A',\n      modelo_vehiculo: parsed.analisis_oferta?.modelo_vehiculo || 'N/A',\n      tasa_nominal: parsed.analisis_oferta?.tasa_nominal || 'N/A',\n      cat_promedio: parsed.analisis_oferta?.cat_promedio || 'N/A',\n      tipo_financiamiento: parsed.analisis_oferta?.tipo_financiamiento || 'N/A',\n      enganche_minimo: parsed.analisis_oferta?.enganche_minimo || 'N/A',\n      plazo_maximo: parsed.analisis_oferta?.plazo_maximo || 'N/A',\n      beneficio_principal: parsed.analisis_oferta?.beneficio_principal || 'N/A',\n      script_refutacion: parsed.sales_enablement?.script_refutacion || 'N/A',\n      es_alerta_critica: parsed.evaluacion_riesgo?.es_alerta_critica || false,\n      nivel_transparencia: parsed.evaluacion_riesgo?.nivel_transparencia || 'Medio',\n      posible_riesgo: parsed.evaluacion_riesgo?.posible_riesgo || 'N/A',\n      promocion_completa: JSON.stringify(parsed)\n    }\n  };\n  \n} catch (error) {\n  console.error('Error procesando Gemini:', error.message);\n  console.log('Respuesta original:', geminiResponse?.substring(0, 500));\n  \n  return {\n    json: {\n      competidor: 'ERROR DE PARSEO',\n      promocion_completa: geminiResponse || 'Sin respuesta',\n      error: error.message,\n      debug_input: JSON.stringify($input.first().json, null, 2).substring(0, 500)\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3584,
+        720
+      ],
+      "id": "9dc23937-2bd5-440b-81d7-136ac785eb40",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "tableId": "alertas",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "competidor",
+              "fieldValue": "={{ $json.competidor }}"
+            },
+            {
+              "fieldId": "promocion",
+              "fieldValue": "={{ $json.promocion_completa }}"
+            },
+            {
+              "fieldId": "umbral",
+              "fieldValue": "={{ $json.nivel_transparencia }}"
+            },
+            {
+              "fieldId": "accion",
+              "fieldValue": "={{ $json.script_refutacion }}"
+            },
+            {
+              "fieldId": "tipo",
+              "fieldValue": "={{ $json.es_alerta_critica ? 'critica' : 'info' }}"
+            },
+            {
+              "fieldId": "titulo",
+              "fieldValue": "={{ $json.beneficio_principal ? $json.beneficio_principal + ' - ' + $json.competidor : 'Alerta Competitiva - ' + $json.competidor }}"
+            },
+            {
+              "fieldId": "activo",
+              "fieldValue": "=true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3808,
+        720
+      ],
+      "id": "3d794eed-1dda-41e1-bd06-a2d15e6cc31c",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "4FI2nYTwq8XK6GOf",
+          "name": "Mi Supabase CI"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "66530f73-7657-47cb-b65c-a759fd7bd8ee",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d1b61473b0039eb58d6ed8dd94a5831c635e0d7f94473d61c46d1034a26dccc0"
+  },
+  "id": "Gbl92R6UoKFnulmL",
+  "tags": []
+}

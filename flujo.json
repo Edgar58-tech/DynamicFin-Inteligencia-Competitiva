@@ -1,0 +1,191 @@
+{
+  "name": "DynamicFin - Analisis Competencia PROD",
+  "nodes": [
+    {
+      "parameters": {
+        "notice": "",
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 0,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [2560, 720],
+      "id": "2b09e803-f391-4407-9cdf-1f27ea2d4f7e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.nissansanje.com.mx/promociones-nissan.html",
+        "authentication": "none",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "autodetect"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [2784, 720],
+      "id": "408543fa-3389-4bb6-9e15-3c0f25eaaf4c",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "sourceData": "json",
+        "dataPropertyName": "data",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "titulo_promo",
+              "cssSelector": ".card-title",
+              "returnValue": "text",
+              "returnArray": false
+            },
+            {
+              "key": "descripcion_promo",
+              "cssSelector": ".card-text",
+              "returnValue": "text",
+              "returnArray": false
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [3008, 720],
+      "id": "f1a64f84-d295-4f66-a12d-9d775d3b7b59",
+      "name": "HTML",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Actúa como un Analista Experto en Productos Financieros Automotrices y Riesgo Crediticio en México.\n\nAnaliza el siguiente texto extraído de una promoción web:\n\"\"\"\nTítulo: {{ $json.titulo_promo }}\nDescripción: {{ $json.descripcion_promo }}\n\"\"\"\n\nINSTRUCCIONES CRÍTICAS:\n1. Debes responder ÚNICAMENTE con un objeto JSON válido\n2. NO incluyas explicaciones, comentarios ni texto adicional\n3. NO uses bloques de código markdown (```json)\n4. SOLO el JSON puro sin nada más\n\nSi no encuentras un dato específico en el texto, usa \"N/A\" para strings o 0 para números.\n\nEstructura EXACTA requerida (copia esta estructura y llena los valores):\n\n{\n  \"analisis_oferta\": {\n    \"competidor\": \"Nombre de la marca automotriz detectada (ej: Toyota, Nissan, Honda)\",\n    \"modelo_vehiculo\": \"Modelo específico si se menciona\",\n    \"tipo_financiamiento\": \"Credito o Leasing o Autofinanciamiento\",\n    \"tasa_nominal\": \"Tasa de interés anual con % (ej: 9.99%)\",\n    \"cat_promedio\": \"CAT si se menciona (ej: 14.5%)\",\n    \"enganche_minimo\": \"Porcentaje o monto de enganche\",\n    \"plazo_maximo\": \"Plazo máximo en meses (ej: 48 meses)\",\n    \"comisiones\": \"Comisiones mencionadas\",\n    \"requisitos_buro\": \"Nivel de exigencia crediticia\",\n    \"beneficio_principal\": \"El gancho principal de marketing\"\n  },\n  \"evaluacion_riesgo\": {\n    \"es_alerta_critica\": true,\n    \"nivel_transparencia\": \"Alto o Medio o Bajo\",\n    \"posible_riesgo\": \"Riesgos identificados en la oferta\"\n  },\n  \"sales_enablement\": {\n    \"script_refutacion\": \"Argumento de venta en máximo 30 palabras para rebatir esta oferta comparando TCO y CAT real\"\n  }\n}\n\nRECUERDA: Responde SOLO con el JSON, sin texto adicional antes o después.",
+              "role": "user"
+            }
+          ]
+        },
+        "simplify": true,
+        "jsonOutput": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [3232, 720],
+      "id": "1d0a46a3-c45c-4aaa-8cde-541ab84ac9ba",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "5KkxmS3Y27zIuuYi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Obtener la respuesta de Gemini\nlet geminiResponse;\n\ntry {\n  // Path correcto para Gemini 2.5 Pro\n  geminiResponse = $input.first().json.content?.parts?.[0]?.text;\n  \n  if (!geminiResponse) {\n    throw new Error('No se encontró la respuesta de Gemini');\n  }\n  \n  console.log('Respuesta original de Gemini:', geminiResponse.substring(0, 100));\n  \n  // Limpiar bloques de markdown ```json```\n  if (geminiResponse.includes('```')) {\n    // Remover ```json al inicio\n    geminiResponse = geminiResponse.replace(/```json/g, '');\n    // Remover ``` al final\n    geminiResponse = geminiResponse.replace(/```/g, '');\n    // Limpiar saltos de línea al inicio y fin\n    geminiResponse = geminiResponse.trim();\n  }\n  \n  console.log('Respuesta limpia:', geminiResponse.substring(0, 100));\n  \n  // Parsear el JSON\n  const parsed = JSON.parse(geminiResponse);\n  \n  console.log('✅ JSON parseado exitosamente');\n  console.log('Competidor:', parsed.analisis_oferta?.competidor);\n  \n  // Si todos los campos son N/A, marcar como error\n  const todosNA = parsed.analisis_oferta?.competidor === 'N/A' &&\n                  parsed.analisis_oferta?.tasa_nominal === 'N/A' &&\n                  parsed.analisis_oferta?.beneficio_principal === 'N/A';\n  \n  if (todosNA) {\n    console.warn('⚠️ Advertencia: La página no tiene información de promociones válidas');\n  }\n  \n  return {\n    json: {\n      competidor: parsed.analisis_oferta?.competidor || 'Información no disponible',\n      modelo_vehiculo: parsed.analisis_oferta?.modelo_vehiculo || 'N/A',\n      tasa_nominal: parsed.analisis_oferta?.tasa_nominal || 'N/A',\n      cat_promedio: parsed.analisis_oferta?.cat_promedio || 'N/A',\n      tipo_financiamiento: parsed.analisis_oferta?.tipo_financiamiento || 'N/A',\n      enganche_minimo: parsed.analisis_oferta?.enganche_minimo || 'N/A',\n      plazo_maximo: parsed.analisis_oferta?.plazo_maximo || 'N/A',\n      comisiones: parsed.analisis_oferta?.comisiones || 'N/A',\n      beneficio_principal: parsed.analisis_oferta?.beneficio_principal || 'N/A',\n      script_refutacion: parsed.sales_enablement?.script_refutacion || 'Consulta con el equipo comercial',\n      es_alerta_critica: parsed.evaluacion_riesgo?.es_alerta_critica || false,\n      nivel_transparencia: parsed.evaluacion_riesgo?.nivel_transparencia || 'Desconocido',\n      posible_riesgo: parsed.evaluacion_riesgo?.posible_riesgo || 'N/A',\n      promocion_completa: JSON.stringify(parsed),\n      tiene_datos_validos: !todosNA\n    }\n  };\n  \n} catch (error) {\n  console.error('❌ Error procesando respuesta:', error.message);\n  console.log('Respuesta que causó el error:', geminiResponse?.substring(0, 300));\n  \n  return {\n    json: {\n      competidor: 'ERROR DE PARSEO',\n      promocion_completa: geminiResponse || 'Sin respuesta',\n      script_refutacion: 'Error al procesar la promoción',\n      es_alerta_critica: false,\n      nivel_transparencia: 'Error',\n      posible_riesgo: error.message,\n      tiene_datos_validos: false,\n      error: true\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3584, 720],
+      "id": "9dc23937-2bd5-440b-81d7-136ac785eb40",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "alertas",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "competidor",
+              "fieldValue": "={{ $json.competidor }}"
+            },
+            {
+              "fieldId": "promocion",
+              "fieldValue": "={{ $json.promocion_completa }}"
+            },
+            {
+              "fieldId": "umbral",
+              "fieldValue": "={{ $json.nivel_transparencia }}"
+            },
+            {
+              "fieldId": "accion",
+              "fieldValue": "={{ $json.script_refutacion }}"
+            },
+            {
+              "fieldId": "tipo",
+              "fieldValue": "={{ $json.es_alerta_critica ? 'critica' : 'info' }}"
+            },
+            {
+              "fieldId": "titulo",
+              "fieldValue": "={{ $json.beneficio_principal ? $json.beneficio_principal + ' - ' + $json.competidor : 'Alerta Competitiva - ' + $json.competidor }}"
+            },
+            {
+              "fieldId": "activo",
+              "fieldValue": "=true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [3808, 720],
+      "id": "3d794eed-1dda-41e1-bd06-a2d15e6cc31c",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "4FI2nYTwq8XK6GOf",
+          "name": "Mi Supabase CI"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [[{"node": "HTTP Request", "type": "main", "index": 0}]]
+    },
+    "HTTP Request": {
+      "main": [[{"node": "HTML", "type": "main", "index": 0}]]
+    },
+    "HTML": {
+      "main": [[{"node": "Message a model", "type": "main", "index": 0}]]
+    },
+    "Message a model": {
+      "main": [[{"node": "Code in JavaScript", "type": "main", "index": 0}]]
+    },
+    "Code in JavaScript": {
+      "main": [[{"node": "Create a row", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "id": "999"
+}
