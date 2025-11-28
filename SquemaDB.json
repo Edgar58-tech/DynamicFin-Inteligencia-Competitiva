@@ -1,614 +1,1002 @@
 [
   {
-    "table_name": "agencias_clientes",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('agencias_clientes_id_seq'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "agencias_clientes",
-    "column_name": "nombre_agencia",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "NO",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "agencias_clientes",
-    "column_name": "latitud",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "agencias_clientes",
-    "column_name": "longitud",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "agencias_clientes",
-    "column_name": "google_maps_api_key",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "agencias_clientes",
-    "column_name": "created_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('alertas_id_seq'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "timestamp",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "tipo_alerta",
-    "data_type": "character varying",
-    "character_maximum_length": 50,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "competidor",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "promocion",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "umbral",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "accion",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "created_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "agencia_cliente_id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": "FOREIGN KEY"
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "activo",
-    "data_type": "boolean",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "true",
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "tipo",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "titulo",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "alertas",
-    "column_name": "tiempo",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('competidores_id_seq'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "agencia_cliente_id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": "FOREIGN KEY"
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "nombre_competidor",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "marca",
-    "data_type": "character varying",
-    "character_maximum_length": 100,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "url_promociones",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "created_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "segmento",
-    "data_type": "USER-DEFINED",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'VOLUMEN'::tipo_segmento",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "ultima_actualizacion",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "ubicacion",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'CDMX'::text",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "tasa_actual",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "0",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "promocion_activa",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'Sin datos'::text",
-    "constraint_type": null
-  },
-  {
-    "table_name": "competidores",
-    "column_name": "nombre",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "id",
-    "data_type": "uuid",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "gen_random_uuid()",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "tasa_maxima",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "12.5",
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "tasa_minima",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "8.99",
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "umbral_alerta",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "50000",
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "email_notificaciones",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'gerencia@hondasanantonio.mx'::text",
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "frecuencia_monitoreo",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'Diaria'::text",
-    "constraint_type": null
-  },
-  {
-    "table_name": "configuracion",
-    "column_name": "created_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('kpis_dashboard_id_seq'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "metrica",
-    "data_type": "character varying",
-    "character_maximum_length": 100,
-    "is_nullable": "NO",
-    "column_default": null,
-    "constraint_type": "UNIQUE"
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "valor_actual",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "valor_competencia",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "diferencial",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "kpis_dashboard",
-    "column_name": "updated_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "id",
-    "data_type": "uuid",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "gen_random_uuid()",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "tipo",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "valor",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "tendencia",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "fecha",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "metricas",
-    "column_name": "descripcion",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('productos_propios_id_seq'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "agencia_cliente_id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": "FOREIGN KEY"
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "modelo",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "NO",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "competidor_directo",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "NO",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "precio_lista",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "descuento_actual",
-    "data_type": "numeric",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "0",
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "created_at",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "tipo_carroceria",
-    "data_type": "character varying",
-    "character_maximum_length": 50,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "rivales_manuales",
-    "data_type": "ARRAY",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "es_nicho",
-    "data_type": "boolean",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "false",
-    "constraint_type": null
-  },
-  {
-    "table_name": "productos_propios",
-    "column_name": "segmento",
-    "data_type": "USER-DEFINED",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "'VOLUMEN'::tipo_segmento",
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "id",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "NO",
-    "column_default": "nextval('\"reseñas_competencia_id_seq\"'::regclass)",
-    "constraint_type": "PRIMARY KEY"
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "timestamp",
-    "data_type": "timestamp with time zone",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": "now()",
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "competidor",
-    "data_type": "character varying",
-    "character_maximum_length": 255,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "rating",
-    "data_type": "integer",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "texto_reseña",
-    "data_type": "text",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "palabras_clave_negativas",
-    "data_type": "ARRAY",
-    "character_maximum_length": null,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
-  },
-  {
-    "table_name": "reseñas_competencia",
-    "column_name": "etiqueta",
-    "data_type": "character varying",
-    "character_maximum_length": 50,
-    "is_nullable": "YES",
-    "column_default": null,
-    "constraint_type": null
+    "Tabla": "agencias_clientes",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('agencias_clientes_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "agencias_clientes",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "nombre_agencia",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "latitud",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "longitud",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "google_maps_api_key",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "agencias_clientes",
+    "Campo": "marca_id",
+    "Tipo de Dato": "bigint",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "marcas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('alertas_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "alertas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "timestamp",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "tipo_alerta",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "competidor",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "promocion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "umbral",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "accion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "agencia_cliente_id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "agencias_clientes",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "activo",
+    "Tipo de Dato": "boolean",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "true",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "tipo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "titulo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas",
+    "Campo": "tiempo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('alertas_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "alertas_testing",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "timestamp",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "tipo_alerta",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "competidor",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "promocion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "umbral",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "accion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "agencia_cliente_id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "activo",
+    "Tipo de Dato": "boolean",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "true",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "tipo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "titulo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "alertas_testing",
+    "Campo": "tiempo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('competidores_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "competidores",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "agencia_cliente_id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "agencias_clientes",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "nombre_competidor",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "marca",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "url_promociones",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "segmento",
+    "Tipo de Dato": "USER-DEFINED",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'VOLUMEN'::tipo_segmento",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "ultima_actualizacion",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "ubicacion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'CDMX'::text",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "tasa_actual",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "0",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "promocion_activa",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'Sin datos'::text",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "nombre",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "competidores",
+    "Campo": "marca_id",
+    "Tipo de Dato": "bigint",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "marcas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "id",
+    "Tipo de Dato": "uuid",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "gen_random_uuid()",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "configuracion",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "tasa_maxima",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "12.5",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "tasa_minima",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "8.99",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "umbral_alerta",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "50000",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "email_notificaciones",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'gerencia@hondasanantonio.mx'::text",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "frecuencia_monitoreo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'Diaria'::text",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "configuracion",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('kpis_dashboard_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "kpis_dashboard",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "metrica",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "kpis_dashboard",
+    "Columna Referencia": "metrica"
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "valor_actual",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "valor_competencia",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "diferencial",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "kpis_dashboard",
+    "Campo": "updated_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "id",
+    "Tipo de Dato": "bigint",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "marcas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "nombre",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "marcas",
+    "Columna Referencia": "nombre"
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "razon_social",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "segmento",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "logo_url",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "activo",
+    "Tipo de Dato": "boolean",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "true",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "marcas",
+    "Campo": "segmento_mercado",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "id",
+    "Tipo de Dato": "uuid",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "gen_random_uuid()",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "metricas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "tipo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "valor",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "tendencia",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "fecha",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "metricas",
+    "Campo": "descripcion",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('productos_propios_id_seq'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "productos_propios",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "agencia_cliente_id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "agencias_clientes",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "modelo",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "competidor_directo",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "precio_lista",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "descuento_actual",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "0",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "tipo_carroceria",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "rivales_manuales",
+    "Tipo de Dato": "ARRAY",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "es_nicho",
+    "Tipo de Dato": "boolean",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "false",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "segmento",
+    "Tipo de Dato": "USER-DEFINED",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "'VOLUMEN'::tipo_segmento",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "marca_id",
+    "Tipo de Dato": "bigint",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "FK (Foránea)",
+    "Tabla Referencia": "marcas",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "linea",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "version",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "anio_modelo",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "productos_propios",
+    "Campo": "precio",
+    "Tipo de Dato": "numeric",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "id",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "nextval('\"reseñas_competencia_id_seq\"'::regclass)",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "reseñas_competencia",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "timestamp",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "competidor",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "rating",
+    "Tipo de Dato": "integer",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "texto_reseña",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "palabras_clave_negativas",
+    "Tipo de Dato": "ARRAY",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "reseñas_competencia",
+    "Campo": "etiqueta",
+    "Tipo de Dato": "character varying",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "vehiculos_competencia",
+    "Campo": "id",
+    "Tipo de Dato": "bigint",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "PK (Primaria)",
+    "Tabla Referencia": "vehiculos_competencia",
+    "Columna Referencia": "id"
+  },
+  {
+    "Tabla": "vehiculos_competencia",
+    "Campo": "created_at",
+    "Tipo de Dato": "timestamp with time zone",
+    "Nulabilidad": "Opcional",
+    "Valor Por Defecto": "now()",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "vehiculos_competencia",
+    "Campo": "marca",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
+  },
+  {
+    "Tabla": "vehiculos_competencia",
+    "Campo": "modelo",
+    "Tipo de Dato": "text",
+    "Nulabilidad": "Requerido",
+    "Valor Por Defecto": "",
+    "Tipo Llave": "",
+    "Tabla Referencia": "",
+    "Columna Referencia": ""
   }
 ]

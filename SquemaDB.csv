@@ -1,0 +1,101 @@
+Tabla,Campo,Tipo de Dato,Nulabilidad,Valor Por Defecto,Tipo Llave,Tabla Referencia,Columna Referencia
+agencias_clientes,id,integer,Requerido,nextval('agencias_clientes_id_seq'::regclass),PK (Primaria),agencias_clientes,id
+agencias_clientes,nombre_agencia,character varying,Requerido,,,,
+agencias_clientes,latitud,numeric,Opcional,,,,
+agencias_clientes,longitud,numeric,Opcional,,,,
+agencias_clientes,google_maps_api_key,text,Opcional,,,,
+agencias_clientes,created_at,timestamp with time zone,Opcional,now(),,,
+agencias_clientes,marca_id,bigint,Opcional,,FK (Foránea),marcas,id
+alertas,id,integer,Requerido,nextval('alertas_id_seq'::regclass),PK (Primaria),alertas,id
+alertas,timestamp,timestamp with time zone,Opcional,now(),,,
+alertas,tipo_alerta,character varying,Opcional,,,,
+alertas,competidor,character varying,Opcional,,,,
+alertas,promocion,text,Opcional,,,,
+alertas,umbral,character varying,Opcional,,,,
+alertas,accion,text,Opcional,,,,
+alertas,created_at,timestamp with time zone,Opcional,now(),,,
+alertas,agencia_cliente_id,integer,Opcional,,FK (Foránea),agencias_clientes,id
+alertas,activo,boolean,Opcional,true,,,
+alertas,tipo,text,Opcional,,,,
+alertas,titulo,text,Opcional,,,,
+alertas,tiempo,text,Opcional,,,,
+alertas_testing,id,integer,Requerido,nextval('alertas_id_seq'::regclass),PK (Primaria),alertas_testing,id
+alertas_testing,timestamp,timestamp with time zone,Opcional,now(),,,
+alertas_testing,tipo_alerta,character varying,Opcional,,,,
+alertas_testing,competidor,character varying,Opcional,,,,
+alertas_testing,promocion,text,Opcional,,,,
+alertas_testing,umbral,character varying,Opcional,,,,
+alertas_testing,accion,text,Opcional,,,,
+alertas_testing,created_at,timestamp with time zone,Opcional,now(),,,
+alertas_testing,agencia_cliente_id,integer,Opcional,,,,
+alertas_testing,activo,boolean,Opcional,true,,,
+alertas_testing,tipo,text,Opcional,,,,
+alertas_testing,titulo,text,Opcional,,,,
+alertas_testing,tiempo,text,Opcional,,,,
+competidores,id,integer,Requerido,nextval('competidores_id_seq'::regclass),PK (Primaria),competidores,id
+competidores,agencia_cliente_id,integer,Opcional,,FK (Foránea),agencias_clientes,id
+competidores,nombre_competidor,character varying,Opcional,,,,
+competidores,marca,character varying,Opcional,,,,
+competidores,url_promociones,text,Opcional,,,,
+competidores,created_at,timestamp with time zone,Opcional,now(),,,
+competidores,segmento,USER-DEFINED,Opcional,'VOLUMEN'::tipo_segmento,,,
+competidores,ultima_actualizacion,timestamp with time zone,Opcional,now(),,,
+competidores,ubicacion,text,Opcional,'CDMX'::text,,,
+competidores,tasa_actual,numeric,Opcional,0,,,
+competidores,promocion_activa,text,Opcional,'Sin datos'::text,,,
+competidores,nombre,text,Opcional,,,,
+competidores,marca_id,bigint,Opcional,,FK (Foránea),marcas,id
+configuracion,id,uuid,Requerido,gen_random_uuid(),PK (Primaria),configuracion,id
+configuracion,tasa_maxima,numeric,Opcional,12.5,,,
+configuracion,tasa_minima,numeric,Opcional,8.99,,,
+configuracion,umbral_alerta,numeric,Opcional,50000,,,
+configuracion,email_notificaciones,text,Opcional,'gerencia@hondasanantonio.mx'::text,,,
+configuracion,frecuencia_monitoreo,text,Opcional,'Diaria'::text,,,
+configuracion,created_at,timestamp with time zone,Opcional,now(),,,
+kpis_dashboard,id,integer,Requerido,nextval('kpis_dashboard_id_seq'::regclass),PK (Primaria),kpis_dashboard,id
+kpis_dashboard,metrica,character varying,Requerido,,,kpis_dashboard,metrica
+kpis_dashboard,valor_actual,numeric,Opcional,,,,
+kpis_dashboard,valor_competencia,numeric,Opcional,,,,
+kpis_dashboard,diferencial,numeric,Opcional,,,,
+kpis_dashboard,updated_at,timestamp with time zone,Opcional,now(),,,
+marcas,id,bigint,Requerido,,PK (Primaria),marcas,id
+marcas,created_at,timestamp with time zone,Opcional,now(),,,
+marcas,nombre,text,Requerido,,,marcas,nombre
+marcas,razon_social,text,Opcional,,,,
+marcas,segmento,text,Opcional,,,,
+marcas,logo_url,text,Opcional,,,,
+marcas,activo,boolean,Opcional,true,,,
+marcas,segmento_mercado,text,Opcional,,,,
+metricas,id,uuid,Requerido,gen_random_uuid(),PK (Primaria),metricas,id
+metricas,tipo,text,Opcional,,,,
+metricas,valor,numeric,Opcional,,,,
+metricas,tendencia,text,Opcional,,,,
+metricas,fecha,timestamp with time zone,Opcional,now(),,,
+metricas,descripcion,text,Opcional,,,,
+productos_propios,id,integer,Requerido,nextval('productos_propios_id_seq'::regclass),PK (Primaria),productos_propios,id
+productos_propios,agencia_cliente_id,integer,Opcional,,FK (Foránea),agencias_clientes,id
+productos_propios,modelo,character varying,Requerido,,,,
+productos_propios,competidor_directo,character varying,Requerido,,,,
+productos_propios,precio_lista,numeric,Requerido,,,,
+productos_propios,descuento_actual,numeric,Opcional,0,,,
+productos_propios,created_at,timestamp with time zone,Opcional,now(),,,
+productos_propios,tipo_carroceria,character varying,Opcional,,,,
+productos_propios,rivales_manuales,ARRAY,Opcional,,,,
+productos_propios,es_nicho,boolean,Opcional,false,,,
+productos_propios,segmento,USER-DEFINED,Opcional,'VOLUMEN'::tipo_segmento,,,
+productos_propios,marca_id,bigint,Opcional,,FK (Foránea),marcas,id
+productos_propios,linea,text,Opcional,,,,
+productos_propios,version,text,Opcional,,,,
+productos_propios,anio_modelo,integer,Opcional,,,,
+productos_propios,precio,numeric,Opcional,,,,
+reseñas_competencia,id,integer,Requerido,"nextval('""reseñas_competencia_id_seq""'::regclass)",PK (Primaria),reseñas_competencia,id
+reseñas_competencia,timestamp,timestamp with time zone,Opcional,now(),,,
+reseñas_competencia,competidor,character varying,Opcional,,,,
+reseñas_competencia,rating,integer,Opcional,,,,
+reseñas_competencia,texto_reseña,text,Opcional,,,,
+reseñas_competencia,palabras_clave_negativas,ARRAY,Opcional,,,,
+reseñas_competencia,etiqueta,character varying,Opcional,,,,
+vehiculos_competencia,id,bigint,Requerido,,PK (Primaria),vehiculos_competencia,id
+vehiculos_competencia,created_at,timestamp with time zone,Opcional,now(),,,
+vehiculos_competencia,marca,text,Requerido,,,,
+vehiculos_competencia,modelo,text,Requerido,,,,

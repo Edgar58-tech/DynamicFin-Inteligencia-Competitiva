@@ -1,11 +1,10 @@
 {
-  "name": "My workflow 2",
+  "name": "DynamicFin - Analisis Competencia PROD",
   "nodes": [
     {
       "parameters": {
         "rule": {
           "interval": [
-            {},
             {}
           ]
         }
@@ -13,17 +12,15 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        2560,
-        720
+        0,
+        0
       ],
-      "id": "2b09e803-f391-4407-9cdf-1f27ea2d4f7e",
+      "id": "aeff5f4e-0a53-40be-bbd6-c55c2a978833",
       "name": "Schedule Trigger"
     },
     {
       "parameters": {
-        "url": "https://www.nissansanje.com.mx/promociones-nissan.html",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
+        "url": "https://www.honda.mx/promociones",
         "options": {
           "response": {
             "response": {}
@@ -33,17 +30,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2784,
-        720
+        224,
+        0
       ],
-      "id": "408543fa-3389-4bb6-9e15-3c0f25eaaf4c",
-      "name": "HTTP Request",
-      "credentials": {
-        "supabaseApi": {
-          "id": "4FI2nYTwq8XK6GOf",
-          "name": "Mi Supabase CI"
-        }
-      }
+      "id": "942e6ed8-e37d-4994-b209-3c22889d17df",
+      "name": "HTTP Request"
     },
     {
       "parameters": {
@@ -55,7 +46,7 @@
               "cssSelector": ".card-title"
             },
             {
-              "key": "descripcion_promo ",
+              "key": "descripcion_promo",
               "cssSelector": ".card-text"
             }
           ]
@@ -65,10 +56,10 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        3008,
-        720
+        448,
+        0
       ],
-      "id": "f1a64f84-d295-4f66-a12d-9d775d3b7b59",
+      "id": "487791fd-0db4-41ea-a525-266a4bd34be3",
       "name": "HTML",
       "alwaysOutputData": true
     },
@@ -87,39 +78,40 @@
             }
           ]
         },
+        "jsonOutput": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        3232,
-        720
+        672,
+        0
       ],
-      "id": "1d0a46a3-c45c-4aaa-8cde-541ab84ac9ba",
+      "id": "0d7dab64-35de-4e30-adea-309e6fda13b5",
       "name": "Message a model",
       "credentials": {
         "googlePalmApi": {
-          "id": "5KkxmS3Y27zIuuYi",
-          "name": "Google Gemini(PaLM) Api account"
+          "id": "8iz2B3aQ4gFGHXyF",
+          "name": "Google Gemini(PaLM) Api account 2"
         }
       }
     },
     {
       "parameters": {
-        "jsCode": "// Obtener la respuesta de Gemini\nlet geminiResponse;\n\ntry {\n  // Path correcto para Gemini 2.5 Pro\n  geminiResponse = $input.first().json.content?.parts?.[0]?.text;\n  \n  if (!geminiResponse) {\n    throw new Error('No se encontró la respuesta de Gemini');\n  }\n  \n  console.log('Respuesta original de Gemini:', geminiResponse.substring(0, 100));\n  \n  // Limpiar bloques de markdown ```json```\n  if (geminiResponse.includes('```')) {\n    // Remover ```json al inicio\n    geminiResponse = geminiResponse.replace(/```json/g, '');\n    // Remover ``` al final\n    geminiResponse = geminiResponse.replace(/```/g, '');\n    // Limpiar saltos de línea al inicio y fin\n    geminiResponse = geminiResponse.trim();\n  }\n  \n  console.log('Respuesta limpia:', geminiResponse.substring(0, 100));\n  \n  // Parsear el JSON\n  const parsed = JSON.parse(geminiResponse);\n  \n  console.log('✅ JSON parseado exitosamente');\n  console.log('Competidor:', parsed.analisis_oferta?.competidor);\n  \n  // Si todos los campos son N/A, marcar como error\n  const todosNA = parsed.analisis_oferta?.competidor === 'N/A' &&\n                  parsed.analisis_oferta?.tasa_nominal === 'N/A' &&\n                  parsed.analisis_oferta?.beneficio_principal === 'N/A';\n  \n  if (todosNA) {\n    console.warn('⚠️ Advertencia: La página no tiene información de promociones válidas');\n  }\n  \n  return {\n    json: {\n      competidor: parsed.analisis_oferta?.competidor || 'Información no disponible',\n      modelo_vehiculo: parsed.analisis_oferta?.modelo_vehiculo || 'N/A',\n      tasa_nominal: parsed.analisis_oferta?.tasa_nominal || 'N/A',\n      cat_promedio: parsed.analisis_oferta?.cat_promedio || 'N/A',\n      tipo_financiamiento: parsed.analisis_oferta?.tipo_financiamiento || 'N/A',\n      enganche_minimo: parsed.analisis_oferta?.enganche_minimo || 'N/A',\n      plazo_maximo: parsed.analisis_oferta?.plazo_maximo || 'N/A',\n      comisiones: parsed.analisis_oferta?.comisiones || 'N/A',\n      beneficio_principal: parsed.analisis_oferta?.beneficio_principal || 'N/A',\n      script_refutacion: parsed.sales_enablement?.script_refutacion || 'Consulta con el equipo comercial',\n      es_alerta_critica: parsed.evaluacion_riesgo?.es_alerta_critica || false,\n      nivel_transparencia: parsed.evaluacion_riesgo?.nivel_transparencia || 'Desconocido',\n      posible_riesgo: parsed.evaluacion_riesgo?.posible_riesgo || 'N/A',\n      promocion_completa: JSON.stringify(parsed),\n      // Marcar si no hay datos válidos\n      tiene_datos_validos: !todosNA\n    }\n  };\n  \n} catch (error) {\n  console.error('❌ Error procesando respuesta:', error.message);\n  console.log('Respuesta que causó el error:', geminiResponse?.substring(0, 300));\n  \n  return {\n    json: {\n      competidor: 'ERROR DE PARSEO',\n      promocion_completa: geminiResponse || 'Sin respuesta',\n      script_refutacion: 'Error al procesar la promoción',\n      es_alerta_critica: false,\n      nivel_transparencia: 'Error',\n      posible_riesgo: error.message,\n      tiene_datos_validos: false,\n      error: true\n    }\n  };\n}"
+        "jsCode": "// Obtener la respuesta de Gemini\nlet geminiResponse;\n\ntry {\n  // Path correcto para Gemini 2.5 Pro\n  geminiResponse = $input.first().json.content?.parts?.[0]?.text;\n  \n  if (!geminiResponse) {\n    throw new Error('No se encontró la respuesta de Gemini');\n  }\n  \n  console.log('Respuesta original de Gemini:', geminiResponse.substring(0, 100));\n  \n  // Limpiar bloques de markdown ```json```\n  if (geminiResponse.includes('```')) {\n    // Remover ```json al inicio\n    geminiResponse = geminiResponse.replace(/```json/g, '');\n    // Remover ``` al final\n    geminiResponse = geminiResponse.replace(/```/g, '');\n    // Limpiar saltos de línea al inicio y fin\n    geminiResponse = geminiResponse.trim();\n  }\n  \n  console.log('Respuesta limpia:', geminiResponse.substring(0, 100));\n  \n  // Parsear el JSON\n  const parsed = JSON.parse(geminiResponse);\n  \n  console.log('✅ JSON parseado exitosamente');\n  console.log('Competidor:', parsed.analisis_oferta?.competidor);\n  \n  // Si todos los campos son N/A, marcar como error\n  const todosNA = parsed.analisis_oferta?.competidor === 'N/A' &&\n                  parsed.analisis_oferta?.tasa_nominal === 'N/A' &&\n                  parsed.analisis_oferta?.beneficio_principal === 'N/A';\n  \n  if (todosNA) {\n    console.warn('⚠️ Advertencia: La página no tiene información de promociones válidas');\n  }\n  \n  return {\n    json: {\n      competidor: parsed.analisis_oferta?.competidor || 'Información no disponible',\n      modelo_vehiculo: parsed.analisis_oferta?.modelo_vehiculo || 'N/A',\n      tasa_nominal: parsed.analisis_oferta?.tasa_nominal || 'N/A',\n      cat_promedio: parsed.analisis_oferta?.cat_promedio || 'N/A',\n      tipo_financiamiento: parsed.analisis_oferta?.tipo_financiamiento || 'N/A',\n      enganche_minimo: parsed.analisis_oferta?.enganche_minimo || 'N/A',\n      plazo_maximo: parsed.analisis_oferta?.plazo_maximo || 'N/A',\n      comisiones: parsed.analisis_oferta?.comisiones || 'N/A',\n      beneficio_principal: parsed.analisis_oferta?.beneficio_principal || 'N/A',\n      script_refutacion: parsed.sales_enablement?.script_refutacion || 'Consulta con el equipo comercial',\n      es_alerta_critica: parsed.evaluacion_riesgo?.es_alerta_critica || false,\n      nivel_transparencia: parsed.evaluacion_riesgo?.nivel_transparencia || 'Desconocido',\n      posible_riesgo: parsed.evaluacion_riesgo?.posible_riesgo || 'N/A',\n      promocion_completa: JSON.stringify(parsed),\n      tiene_datos_validos: !todosNA\n    }\n  };\n  \n} catch (error) {\n  console.error('❌ Error procesando respuesta:', error.message);\n  console.log('Respuesta que causó el error:', geminiResponse?.substring(0, 300));\n  \n  return {\n    json: {\n      competidor: 'ERROR DE PARSEO',\n      promocion_completa: geminiResponse || 'Sin respuesta',\n      script_refutacion: 'Error al procesar la promoción',\n      es_alerta_critica: false,\n      nivel_transparencia: 'Error',\n      posible_riesgo: error.message,\n      tiene_datos_validos: false,\n      error: true\n    }\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3584,
-        720
+        1024,
+        0
       ],
-      "id": "9dc23937-2bd5-440b-81d7-136ac785eb40",
+      "id": "c0560aff-1c14-4811-a90f-2120a9a3b5b7",
       "name": "Code in JavaScript"
     },
     {
       "parameters": {
-        "tableId": "alertas",
+        "tableId": "alertas_testing",
         "fieldsUi": {
           "fieldValues": [
             {
@@ -156,15 +148,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        3808,
-        720
+        1248,
+        0
       ],
-      "id": "3d794eed-1dda-41e1-bd06-a2d15e6cc31c",
+      "id": "a2449a6b-efb5-4047-a34f-1abadda9b087",
       "name": "Create a row",
       "credentials": {
         "supabaseApi": {
-          "id": "4FI2nYTwq8XK6GOf",
-          "name": "Mi Supabase CI"
+          "id": "5qc0C8mI1f0D2WzR",
+          "name": "Supabase account"
         }
       }
     }
@@ -231,11 +223,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "81b7ee4a-6096-42a1-baa8-fd2b7133ba29",
+  "versionId": "4f572020-181d-4ed3-9f31-481952680730",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d1b61473b0039eb58d6ed8dd94a5831c635e0d7f94473d61c46d1034a26dccc0"
   },
-  "id": "Gbl92R6UoKFnulmL",
+  "id": "L6YhHayOC0cfhYjn",
   "tags": []
 }
